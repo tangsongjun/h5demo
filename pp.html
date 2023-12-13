@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>302 Redirect Example</title>
+    <p>test deep link</p>
 </head>
 <body>
 
 <script>
     // 模拟一个触发重定向的场景
+    let redirectUrl = 'app://live/room';
     function simulateRedirect() {
         // 模拟 HTTP 302 重定向，携带原链接的参数
-        var redirectUrl = 'https://www.baidu.com';
+        
         
         // 获取原链接的参数
         var originalParams = window.location.search.substring(1);
@@ -23,10 +25,29 @@
 
         // 使用 window.location.href 实现手动重定向
         window.location.href = redirectUrl;
+         // 在页面加载完成时尝试打开应用链接
+
     }
+
+    function openAppLink() {
+        // 尝试在当前窗口打开应用链接
+        window.location.href = redirectUrl;
+
+        // 设置一个超时时间，如果应用链接打开成功，超时时间内会跳转到应用
+        setTimeout(function() {
+            // 在超时时间内未跳转到应用，说明应用可能未安装
+            console.log('App may not be installed.');
+            window.location.href = "https://play.google.com/store/apps/details?id=com.universe.live&referrer=" + redirectUrl;
+
+        }, 2000); // 设置超时时间为 1 秒
+    }
+
 
     // 调用函数以触发重定向
     simulateRedirect();
+    openAppLink()
+    window.addEventListener('load', openAppLink);
+
 </script>
 
 </body>
