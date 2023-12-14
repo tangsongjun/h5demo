@@ -24,7 +24,8 @@
         console.log('openAppLink:' + originUrl);
         var specifiedParam = "roomId"
         var paramValue = getQueryparam(originUrl, specifiedParam)
-        if (paramValue != null) {
+        console.log('has speccified key:' + paramValue)
+        if (paramValue) {
             redirectUrl = 'app://live/room'
         } else {
             redirectUrl = 'app://user/profile'
