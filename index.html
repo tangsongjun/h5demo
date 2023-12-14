@@ -13,10 +13,18 @@
     let redirectUrl = 'app://live/room';   
     
     function getQueryparam(url, param) {
-        var queryString = url.split['?'][1]
+        var queryString = url.split['?']
+        console.log('queryString:' + queryString)
         if (!queryString) {
             return null
         }
+
+        queryString = queryString[1]
+        console.log('queryString1:' + queryString)
+        if (!queryString) {
+            return null
+        }
+    
 
         var params = new URLSearchParams(queryString)
         return params.get(param)
