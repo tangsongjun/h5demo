@@ -12,22 +12,11 @@
     // 模拟一个触发重定向的场景
     let redirectUrl = 'app://live/room';   
     
-    function getQueryparam(url, param) {
-        var queryString = url.split['?']
-        console.log('queryString:' + queryString)
-        if (!queryString) {
-            return null
-        }
-
-        queryString = queryString[1]
-        console.log('queryString1:' + queryString)
-        if (!queryString) {
-            return null
-        }
-    
-
-        var params = new URLSearchParams(queryString)
-        return params.get(param)
+    function getQueryparam(urlString, specifiedParam) {
+        var  url = new URL(urlString)
+        var params = new URLSearchParams(url.search)
+        console.log('queryString:' + params)
+        return params.has(specifiedParam)
     }
 
     function openAppLink() {
@@ -58,7 +47,7 @@
         setTimeout(function() {
             // 在超时时间内未跳转到应用，说明应用可能未安装
             console.log('App may not be installed.');
-            window.location.href = "https://play.google.com/store/apps/details?id=com.universe.live&referrer=" + redirectUrl;
+            // window.location.href = "https://play.google.com/store/apps/details?id=com.universe.live&referrer=" + redirectUrl;
 
         }, 1000); // 设置超时时间为 1 秒
     }
