@@ -23,7 +23,8 @@
     }
 
     function openAppLink() {
-        var originUrl = document.referrer
+        var originUrl = window.location.href
+        console.log('openAppLink:' + originUrl);
         var specifiedParam = "roomId"
         var paramValue = getQueryparam(originUrl, specifiedParam)
         if (paramValue != null) {
@@ -32,7 +33,6 @@
             redirectUrl = 'app://user/profile'
         }
 
-        console.log('openAppLink:' + originUrl);
         // 获取原链接的参数
         var originalParams = window.location.search.substring(1);
         // 如果原链接有参数，将其添加到重定向链接中
@@ -54,7 +54,6 @@
 
         }, 1000); // 设置超时时间为 1 秒
     }
-
     openAppLink()
 
 </script>
